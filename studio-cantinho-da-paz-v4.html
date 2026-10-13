@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#efe8df">
+  <title>Studio Cantinho da Paz</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#f7f3ee;--card:#fffdf9;--text:#2e2925;--muted:#746b64;
+      --accent:#9b7d66;--line:#e5d9cf;--green:#25D366;--shadow:0 16px 40px rgba(70,48,32,.10)
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;line-height:1.5}
+    .wrap{max-width:760px;margin:auto;padding:0 18px 110px}
+    .hero{
+      margin:18px 0 24px;padding:34px 24px;border-radius:28px;
+      background:radial-gradient(circle at 85% 10%, rgba(255,255,255,.72), transparent 30%),linear-gradient(145deg,#d9c7b8,#f3e9df 52%,#cdb8a6);
+      box-shadow:var(--shadow);min-height:310px;display:flex;flex-direction:column;justify-content:flex-end
+    }
+    .eyebrow{display:inline-block;width:max-content;padding:7px 11px;border-radius:999px;background:rgba(255,255,255,.62);font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;margin-bottom:14px}
+    h1{font-size:38px;line-height:1.03;margin:0 0 10px;max-width:560px}
+    .hero p{font-size:16px;margin:0;color:#4f453e;max-width:560px}
+    .signatureWrap{margin-top:12px;display:flex;flex-direction:column;align-items:flex-start;gap:2px}
+    .signatureRole{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#8a786c;font-weight:700}
+    .signatureName{font-family:"Great Vibes",cursive;font-size:34px;line-height:1.0;color:#6f5847;font-weight:400}
+    .topActions{display:flex;gap:10px;margin-top:20px;flex-wrap:wrap}
+    .btn{border:0;border-radius:14px;padding:14px 18px;font-weight:800;font-size:15px;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;cursor:pointer}
+    .btnPrimary{background:#2f2925;color:#fff}
+    .btnLight{background:rgba(255,255,255,.72);color:#2f2925;border:1px solid rgba(80,60,45,.12)}
+    .sectionTitle{font-size:24px;margin:34px 2px 14px}
+    .intro{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:20px;box-shadow:0 8px 25px rgba(60,40,25,.05)}
+    .intro p{margin:0;color:var(--muted)}
+    .grid{display:grid;gap:14px}
+    .service{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:19px;box-shadow:0 8px 25px rgba(60,40,25,.05)}
+    .serviceHead{display:flex;align-items:flex-start;gap:14px}
+    .icon{width:46px;height:46px;border-radius:16px;background:#efe3d8;display:grid;place-items:center;font-size:23px;flex:0 0 auto}
+    .service h3{margin:0 0 5px;font-size:18px}
+    .service p{margin:0;color:var(--muted);font-size:14px}
+    .miniBtn{margin-top:14px;border:1px solid var(--line);background:#fff8f1;color:#3d332c;width:100%;padding:12px;border-radius:12px;font-weight:800;cursor:pointer}
+    .formCard{background:#2f2925;color:#fff;border-radius:26px;padding:22px;box-shadow:var(--shadow)}
+    .formCard .sectionTitle{margin-top:0;color:#fff}
+    label{display:block;font-size:13px;font-weight:800;margin:14px 0 6px}
+    input,select,textarea{width:100%;border:1px solid #5c5048;background:#3b332e;color:#fff;border-radius:13px;padding:13px 14px;font:inherit;outline:none}
+    input:focus,select:focus,textarea:focus{border-color:#d9c2ad}
+    textarea{min-height:96px;resize:vertical}
+    .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .waBtn{margin-top:17px;width:100%;background:var(--green);color:#073b1c;border:0;border-radius:14px;padding:15px;font-size:16px;font-weight:900;cursor:pointer}
+    .note{font-size:11px;color:#c8beb8;margin-top:10px}
+    .footer{text-align:center;color:var(--muted);font-size:12px;margin:28px 0 0}
+    .floating{position:fixed;left:18px;right:18px;bottom:18px;max-width:724px;margin:auto;background:var(--green);color:#073b1c;text-decoration:none;border-radius:16px;padding:15px 18px;text-align:center;font-weight:900;box-shadow:0 12px 30px rgba(0,0,0,.18);z-index:9}
+    @media(max-width:520px){h1{font-size:32px}.hero{min-height:285px;padding:26px 20px}.row{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <span class="eyebrow">Atendimento com hora marcada</span>
+      <h1>Studio Cantinho da Paz</h1>
+      <p>Terapias, bem-estar e beleza com atendimento personalizado, presencial e online.</p>
+      <div class="signatureWrap">
+        <div class="signatureRole">Terapeuta</div>
+        <div class="signatureName">Dirley de Oliveira</div>
+      </div>
+      <div class="topActions">
+        <a class="btn btnPrimary" href="#agendar">Agendar atendimento</a>
+        <a class="btn btnLight" href="#servicos">Ver serviços</a>
+      </div>
+    </section>
+
+    <section class="intro">
+      <p>
+        Um espaço dedicado ao autocuidado, relaxamento e bem-estar. Atendimento online com hora marcada,
+        terapias com pedras quentes e óleos essenciais, cuidados para os pés e micropigmentação de sobrancelhas fio a fio.
+      </p>
+    </section>
+
+    <h2 class="sectionTitle" id="servicos">Serviços</h2>
+    <div class="grid">
+      <article class="service">
+        <div class="serviceHead">
+          <div class="icon">♨️</div>
+          <div>
+            <h3>Terapia com Pedras Quentes</h3>
+            <p>Relaxamento profundo com pedras aquecidas e óleos essenciais, promovendo conforto e alívio das tensões.</p>
+          </div>
+        </div>
+        <button class="miniBtn" onclick="chooseService('Terapia com Pedras Quentes e Óleos Essenciais')">Quero agendar</button>
+      </article>
+
+      <article class="service">
+        <div class="serviceHead">
+          <div class="icon">🦶</div>
+          <div>
+            <h3>SPA dos Pés</h3>
+            <p>Cuidado, hidratação e relaxamento para os pés em uma experiência de bem-estar.</p>
+          </div>
+        </div>
+        <button class="miniBtn" onclick="chooseService('SPA dos Pés')">Quero agendar</button>
+      </article>
+
+      <article class="service">
+        <div class="serviceHead">
+          <div class="icon">✨</div>
+          <div>
+            <h3>Micropigmentação de Sobrancelhas</h3>
+            <p>Técnica fio a fio com atendimento individual e hora marcada.</p>
+          </div>
+        </div>
+        <button class="miniBtn" onclick="chooseService('Micropigmentação de Sobrancelhas - Fio a Fio')">Quero agendar</button>
+      </article>
+
+      <article class="service">
+        <div class="serviceHead">
+          <div class="icon">💬</div>
+          <div>
+            <h3>Terapia Online</h3>
+            <p>Atendimento individual online, realizado com hora previamente marcada.</p>
+          </div>
+        </div>
+        <button class="miniBtn" onclick="chooseService('Terapia Online')">Quero agendar</button>
+      </article>
+    </div>
+
+    <section class="formCard" id="agendar" style="margin-top:34px">
+      <h2 class="sectionTitle">Solicitar agendamento</h2>
+
+      <label for="nome">Seu nome</label>
+      <input id="nome" type="text" placeholder="Digite seu nome">
+
+      <label for="servico">Serviço desejado</label>
+      <select id="servico">
+        <option value="">Selecione um serviço</option>
+        <option>Terapia com Pedras Quentes e Óleos Essenciais</option>
+        <option>SPA dos Pés</option>
+        <option>Micropigmentação de Sobrancelhas - Fio a Fio</option>
+        <option>Terapia Online</option>
+        <option>Outro / Quero informações</option>
+      </select>
+
+      <div class="row">
+        <div>
+          <label for="data">Data preferida</label>
+          <input id="data" type="date">
+        </div>
+        <div>
+          <label for="hora">Horário preferido</label>
+          <input id="hora" type="time">
+        </div>
+      </div>
+
+      <label for="obs">Observações</label>
+      <textarea id="obs" placeholder="Conte brevemente o que você procura ou deixe alguma observação."></textarea>
+
+      <button class="waBtn" onclick="sendWhatsApp()">Solicitar pelo WhatsApp</button>
+      <div class="note">O envio da mensagem é uma solicitação. O horário será confirmado pelo Studio Cantinho da Paz.</div>
+    </section>
+
+    <div class="footer">Studio Cantinho da Paz • Terapeuta Dirley de Oliveira • Atendimento com hora marcada</div>
+  </div>
+
+  <a class="floating" href="https://wa.me/5567998789978" target="_blank" rel="noopener">Falar no WhatsApp</a>
+
+  <script>
+    const whatsapp = '5567998789978';
+
+    function chooseService(service){
+      document.getElementById('servico').value = service;
+      document.getElementById('agendar').scrollIntoView({behavior:'smooth'});
+    }
+
+    function sendWhatsApp(){
+      const nome = document.getElementById('nome').value.trim();
+      const servico = document.getElementById('servico').value;
+      const data = document.getElementById('data').value;
+      const hora = document.getElementById('hora').value;
+      const obs = document.getElementById('obs').value.trim();
+
+      if(!nome || !servico){
+        alert('Preencha seu nome e escolha o serviço desejado.');
+        return;
+      }
+
+      const dataBr = data ? data.split('-').reverse().join('/') : 'A combinar';
+      const horaTxt = hora || 'A combinar';
+
+      const msg = [
+        'Olá! Gostaria de solicitar um agendamento com a terapeuta Dirley de Oliveira, no Studio Cantinho da Paz.',
+        '',
+        'Nome: ' + nome,
+        'Serviço: ' + servico,
+        'Data preferida: ' + dataBr,
+        'Horário preferido: ' + horaTxt,
+        obs ? 'Observações: ' + obs : '',
+        '',
+        'Gostaria de verificar a disponibilidade.'
+      ].filter(Boolean).join('\n');
+
+      window.open('https://wa.me/' + whatsapp + '?text=' + encodeURIComponent(msg), '_blank');
+    }
+  </script>
+</body>
+</html>
