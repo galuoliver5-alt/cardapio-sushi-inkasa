@@ -270,8 +270,8 @@ textarea{min-height:95px;resize:vertical}
 
   <div id="conteudo"></div>
   <section class="videoIntro" id="videoIntro">
-    <video id="introVideo" autoplay muted playsinline webkit-playsinline controls preload="auto">
-      <source src="Sushi%20INKASAilha.mov" type="video/quicktime">
+    <video id="introVideo" playsinline webkit-playsinline controls preload="auto">
+      <source src="Sushi-INKASA-ilha-leve.mp4" type="video/mp4">
       Não foi possível carregar a apresentação. Você pode pular e continuar para as opções de eventos.
     </video>
     <div class="videoShade"></div>
@@ -282,7 +282,7 @@ textarea{min-height:95px;resize:vertical}
     </div>
 
     <div class="introActions">
-      <button class="listenBtn" id="listenBtn" type="button">🔊 Ativar som e assistir do início</button>
+      <button class="listenBtn" id="listenBtn" type="button">▶ Assistir apresentação com som</button>
       <div class="introInfo">Se o vídeo não iniciar sozinho, toque no ▶ do próprio vídeo.</div>
       <a class="skipIntro" id="skipIntro" href="#conteudo">Pular apresentação</a>
     </div>
@@ -980,20 +980,10 @@ buildSummary();
         });
       }
 
-      // Tenta iniciar o autoplay mudo quando a página carregar.
-      const tryPlay = function(){
-        video.muted = true;
-        const p = video.play();
-        if(p && typeof p.catch === 'function'){
-          p.catch(function(){ /* controles nativos ficam disponíveis */ });
-        }
-      };
-
-      if(document.readyState === 'loading'){
-        document.addEventListener('DOMContentLoaded', tryPlay, {once:true});
-      }else{
-        tryPlay();
-      }
+      // Não usa autoplay: navegadores, especialmente o iPhone, bloqueiam áudio automático.
+      // O vídeo começa com som após o toque do usuário no botão acima.
+      video.muted = false;
+      video.volume = 1;
     })();
 
   </script>
