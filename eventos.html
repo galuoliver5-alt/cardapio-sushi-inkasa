@@ -88,6 +88,42 @@ input,select,textarea{
 input:focus,select:focus,textarea:focus{border-color:#686868}
 textarea{min-height:95px;resize:vertical}
 
+
+.qtyRow{
+  display:none;
+  margin-top:12px;
+  padding:12px;
+  border:1px solid #343434;
+  border-radius:14px;
+  background:#0b0b0b;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+}
+.package.selected .qtyRow{display:flex}
+.qtyLabel{font-size:12px;font-weight:900;color:#f2f2f2}
+.qtyHint{display:block;margin-top:3px;font-size:10px;font-weight:600;color:#888}
+.qtySide{display:flex;flex-direction:column;align-items:flex-end;gap:7px}
+.stepper{
+  display:flex;align-items:center;overflow:hidden;
+  border:1px solid #3b3b3b;border-radius:999px;background:#111
+}
+.stepper button{
+  width:40px;height:38px;border:0;background:#171717;color:#fff;
+  font-size:23px;font-weight:700;line-height:1;cursor:pointer
+}
+.stepper input{
+  width:64px;height:38px;border:0;border-left:1px solid #333;border-right:1px solid #333;
+  background:#090909;color:#fff;text-align:center;font-size:14px;font-weight:900;
+  border-radius:0;padding:0
+}
+.stepper input::-webkit-outer-spin-button,.stepper input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+.qtyTotal{font-size:11px;color:#aaa;font-weight:700}
+.qtyTotal strong{color:#fff}
+@media(max-width:420px){
+  .qtyRow{align-items:flex-start}
+  .qtySide{align-items:flex-end}
+}
 .optionalBox{
   margin-top:14px;padding:15px;border:1px solid #343434;border-radius:16px;background:#0c0c0c
 }
@@ -224,8 +260,22 @@ textarea{min-height:95px;resize:vertical}
         <li>Estrutura de buffet oriental completa</li>
       </ul>
       <div class="selectLine">
-        <input type="radio" name="servico" value="Ilha de Sushi INKASA 01" data-kind="fixed" data-price="3000">
+        <input type="radio" name="servico" value="Ilha de Sushi INKASA 01" data-kind="fixed" data-price="3000" data-qty-id="qtyIlha01">
         Selecionar esta ilha
+      </div>
+      <div class="qtyRow">
+        <div>
+          <div class="qtyLabel">Quantidade de ilhas</div>
+          <span class="qtyHint">1, 2, 3, 4, 5, 6… sem limite fixo</span>
+        </div>
+        <div class="qtySide">
+          <div class="stepper" data-service="Ilha de Sushi INKASA 01">
+            <button type="button" class="qtyMinus" aria-label="Diminuir">−</button>
+            <input id="qtyIlha01" class="qtyInput" type="number" min="1" step="1" value="1" inputmode="numeric">
+            <button type="button" class="qtyPlus" aria-label="Aumentar">+</button>
+          </div>
+          <div class="qtyTotal">Total: <strong id="totalIlha01">R$ 3.000,00</strong></div>
+        </div>
       </div>
     </label>
 
@@ -252,8 +302,22 @@ textarea{min-height:95px;resize:vertical}
         <li>Estrutura de buffet oriental completa</li>
       </ul>
       <div class="selectLine">
-        <input type="radio" name="servico" value="Ilha de Sushi INKASA 02" data-kind="fixed" data-price="5400">
+        <input type="radio" name="servico" value="Ilha de Sushi INKASA 02" data-kind="fixed" data-price="5400" data-qty-id="qtyIlha02">
         Selecionar esta ilha
+      </div>
+      <div class="qtyRow">
+        <div>
+          <div class="qtyLabel">Quantidade de ilhas</div>
+          <span class="qtyHint">1, 2, 3, 4, 5, 6… sem limite fixo</span>
+        </div>
+        <div class="qtySide">
+          <div class="stepper" data-service="Ilha de Sushi INKASA 02">
+            <button type="button" class="qtyMinus" aria-label="Diminuir">−</button>
+            <input id="qtyIlha02" class="qtyInput" type="number" min="1" step="1" value="1" inputmode="numeric">
+            <button type="button" class="qtyPlus" aria-label="Aumentar">+</button>
+          </div>
+          <div class="qtyTotal">Total: <strong id="totalIlha02">R$ 5.400,00</strong></div>
+        </div>
       </div>
     </label>
 
@@ -276,8 +340,22 @@ textarea{min-height:95px;resize:vertical}
         <li>Estrutura de buffet oriental completa</li>
       </ul>
       <div class="selectLine">
-        <input type="radio" name="servico" value="Ilha de Sushi INKASA 03" data-kind="perperson" data-price="80" data-min="51">
+        <input type="radio" name="servico" value="Ilha de Sushi INKASA 03" data-kind="perperson" data-price="80" data-min="51" data-qty-id="qtyPessoas03">
         Selecionar Ilha 03
+      </div>
+      <div class="qtyRow">
+        <div>
+          <div class="qtyLabel">Quantidade de pessoas</div>
+          <span class="qtyHint">Mínimo: 51 pessoas</span>
+        </div>
+        <div class="qtySide">
+          <div class="stepper" data-service="Ilha de Sushi INKASA 03">
+            <button type="button" class="qtyMinus" aria-label="Diminuir">−</button>
+            <input id="qtyPessoas03" class="qtyInput" type="number" min="51" step="1" value="51" inputmode="numeric">
+            <button type="button" class="qtyPlus" aria-label="Aumentar">+</button>
+          </div>
+          <div class="qtyTotal">Total: <strong id="totalPessoas03">R$ 4.080,00</strong></div>
+        </div>
       </div>
     </label>
 
@@ -303,8 +381,22 @@ textarea{min-height:95px;resize:vertical}
         <li>Estrutura de buffet oriental completa</li>
       </ul>
       <div class="selectLine">
-        <input type="radio" name="servico" value="Ilha de Sushi INKASA 04" data-kind="perperson" data-price="140" data-min="51">
+        <input type="radio" name="servico" value="Ilha de Sushi INKASA 04" data-kind="perperson" data-price="140" data-min="51" data-qty-id="qtyPessoas04">
         Selecionar Ilha 04
+      </div>
+      <div class="qtyRow">
+        <div>
+          <div class="qtyLabel">Quantidade de pessoas</div>
+          <span class="qtyHint">Mínimo: 51 pessoas</span>
+        </div>
+        <div class="qtySide">
+          <div class="stepper" data-service="Ilha de Sushi INKASA 04">
+            <button type="button" class="qtyMinus" aria-label="Diminuir">−</button>
+            <input id="qtyPessoas04" class="qtyInput" type="number" min="51" step="1" value="51" inputmode="numeric">
+            <button type="button" class="qtyPlus" aria-label="Aumentar">+</button>
+          </div>
+          <div class="qtyTotal">Total: <strong id="totalPessoas04">R$ 7.140,00</strong></div>
+        </div>
       </div>
     </label>
 
@@ -322,10 +414,45 @@ textarea{min-height:95px;resize:vertical}
         O valor é calculado pela quantidade de convidados, respeitando o mínimo de 12 pessoas.
       </div>
       <a class="menuBtn" href="cardapio-rodizio-eventos-inkasa.pdf" target="_blank" rel="noopener">Ver cardápio do Rodízio INKASA</a>
+
+      <div class="optionalBox" style="margin-top:12px">
+        <h3>Pescados especiais — opcional</h3>
+        <p>
+          Deseja incluir algum pescado especial no seu rodízio? Atum, polvo, prego e
+          peixe branco da estação precisam ser solicitados com no mínimo 7 dias de
+          antecedência. Produtos vindos da costa catarinense, sujeitos à disponibilidade.
+        </p>
+        <div class="chips">
+          <label class="chip"><input class="specialFish" type="checkbox" value="Atum"><span>Atum</span></label>
+          <label class="chip"><input class="specialFish" type="checkbox" value="Polvo"><span>Polvo</span></label>
+          <label class="chip"><input class="specialFish" type="checkbox" value="Prego"><span>Prego</span></label>
+          <label class="chip"><input class="specialFish" type="checkbox" value="Peixe branco da estação"><span>Peixe branco da estação</span></label>
+        </div>
+        <div class="otherWrap">
+          <label class="field">
+            <span>Outro pescado para consultar</span>
+            <input id="outroPescado" placeholder="Ex.: vieira, lula, outro peixe...">
+          </label>
+        </div>
+      </div>
       <label class="selectLine" style="margin-top:12px">
-        <input type="radio" name="servico" value="Serviço de Rodízio INKASA" data-kind="perperson" data-price="380" data-min="12">
+        <input type="radio" name="servico" value="Serviço de Rodízio INKASA" data-kind="perperson" data-price="380" data-min="12" data-qty-id="qtyPessoasRodizio">
         Selecionar serviço de rodízio
       </label>
+      <div class="qtyRow">
+        <div>
+          <div class="qtyLabel">Quantidade de pessoas</div>
+          <span class="qtyHint">Mínimo: 12 pessoas</span>
+        </div>
+        <div class="qtySide">
+          <div class="stepper" data-service="Serviço de Rodízio INKASA">
+            <button type="button" class="qtyMinus" aria-label="Diminuir">−</button>
+            <input id="qtyPessoasRodizio" class="qtyInput" type="number" min="12" step="1" value="12" inputmode="numeric">
+            <button type="button" class="qtyPlus" aria-label="Aumentar">+</button>
+          </div>
+          <div class="qtyTotal">Total: <strong id="totalPessoasRodizio">R$ 4.560,00</strong></div>
+        </div>
+      </div>
     </div>
 
   </div>
@@ -391,26 +518,6 @@ textarea{min-height:95px;resize:vertical}
       </label>
     </div>
 
-    <div class="optionalBox">
-      <h3>Pescados especiais — opcional</h3>
-      <p>
-        Atum, polvo, prego e peixes brancos da estação precisam ser solicitados com
-        no mínimo 7 dias de antecedência. Os produtos vêm da costa catarinense e
-        dependem de disponibilidade.
-      </p>
-      <div class="chips">
-        <label class="chip"><input class="specialFish" type="checkbox" value="Atum"><span>Atum</span></label>
-        <label class="chip"><input class="specialFish" type="checkbox" value="Polvo"><span>Polvo</span></label>
-        <label class="chip"><input class="specialFish" type="checkbox" value="Prego"><span>Prego</span></label>
-        <label class="chip"><input class="specialFish" type="checkbox" value="Peixe branco da estação"><span>Peixe branco da estação</span></label>
-      </div>
-      <div class="otherWrap">
-        <label class="field">
-          <span>Outro pescado que gostaria de consultar</span>
-          <input id="outroPescado" placeholder="Ex.: vieira, lula, outro peixe...">
-        </label>
-      </div>
-    </div>
 
     <div class="note">
       O envio da solicitação não confirma a reserva. Data, disponibilidade, deslocamento, estrutura e detalhes finais do serviço são confirmados diretamente com o Sushi INKASA.
@@ -539,17 +646,29 @@ const BRL = n => new Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL'}
 function selectedService(){
   return document.querySelector('input[name="servico"]:checked');
 }
+function selectedQuantity(){
+  const s = selectedService();
+  if(!s) return 0;
+  const input = document.getElementById(s.dataset.qtyId);
+  if(!input) return 1;
+  const min = Number(input.min||1);
+  return Math.max(min, Number(input.value||min));
+}
 function valueInfo(){
   const s = selectedService();
   if(!s) return {value:null,label:'—'};
   const kind = s.dataset.kind;
   const base = Number(s.dataset.price||0);
-  if(kind === 'fixed') return {value:base,label:BRL(base)};
-  const pessoas = Number(document.getElementById('pessoas').value||0);
-  const minimo = Number(s.dataset.min||1);
-  const cobradas = Math.max(minimo,pessoas||minimo);
-  const total = cobradas * base;
-  return {value:total,label:BRL(total),count:cobradas,minimo:minimo,unit:base};
+  const qty = selectedQuantity();
+  const total = base * qty;
+  return {
+    value:total,
+    label:BRL(total),
+    count:qty,
+    minimo:Number(s.dataset.min||1),
+    unit:base,
+    kind:kind
+  };
 }
 function buildSummary(){
   const s = selectedService();
@@ -574,9 +693,10 @@ function buildSummary(){
 
   const especiais = [...document.querySelectorAll('.specialFish:checked')].map(el=>el.value);
   const outroPescado = document.getElementById('outroPescado').value.trim();
-  if(especiais.length || outroPescado){
+  const isRodizio = s && s.value === 'Serviço de Rodízio INKASA';
+  if(isRodizio && (especiais.length || outroPescado)){
     lines.push('');
-    lines.push('Pescados especiais solicitados:');
+    lines.push('Pescados especiais solicitados no Rodízio INKASA:');
     if(especiais.length) lines.push(especiais.join(', '));
     if(outroPescado) lines.push('Outro para verificar: ' + outroPescado);
     lines.push('Observação: pescados especiais exigem mínimo de 7 dias de antecedência e dependem de disponibilidade da costa catarinense.');
@@ -586,9 +706,12 @@ function buildSummary(){
     const minimo = Number(s.dataset.min||1);
     const unit = Number(s.dataset.price||0);
     lines.push('', s.value + ': ' + BRL(unit) + ' por pessoa • mínimo ' + minimo + ' pessoas');
-    lines.push('Valor base estimado: ' + vi.label);
+    lines.push('Quantidade selecionada: ' + vi.count + ' pessoas');
+    lines.push('Valor estimado: ' + vi.label);
   } else if(s) {
-    lines.push('', 'Valor do pacote: ' + vi.label);
+    lines.push('', 'Quantidade de ilhas: ' + vi.count);
+    lines.push('Valor unitário: ' + BRL(Number(s.dataset.price||0)));
+    lines.push('Valor estimado: ' + vi.label);
   }
 
   lines.push('', 'Gostaria de confirmar disponibilidade e os detalhes finais do serviço.');
@@ -598,10 +721,130 @@ function buildSummary(){
   return lines.join('\n');
 }
 
-document.querySelectorAll('input,select,textarea').forEach(el=>{
+function findServiceRadio(serviceName){
+  return [...document.querySelectorAll('input[name="servico"]')].find(r=>r.value===serviceName);
+}
+
+function refreshSelectedPackage(){
+  document.querySelectorAll('.package').forEach(p=>p.classList.remove('selected'));
+  const s = selectedService();
+  if(!s) return;
+  const pkg = s.closest('.package');
+  if(pkg) pkg.classList.add('selected');
+
+  if(s.dataset.kind === 'perperson'){
+    const qty = selectedQuantity();
+    const pessoas = document.getElementById('pessoas');
+    if(pessoas) pessoas.value = qty;
+  }
+}
+
+function updatePackageTotals(){
+  const configs = [
+    ['qtyIlha01','totalIlha01',3000],
+    ['qtyIlha02','totalIlha02',5400],
+    ['qtyPessoas03','totalPessoas03',80],
+    ['qtyPessoas04','totalPessoas04',140],
+    ['qtyPessoasRodizio','totalPessoasRodizio',380]
+  ];
+  configs.forEach(([inputId,totalId,unit])=>{
+    const input = document.getElementById(inputId);
+    const total = document.getElementById(totalId);
+    if(!input || !total) return;
+    const min = Number(input.min||1);
+    const qty = Math.max(min, Number(input.value||min));
+    input.value = qty;
+    total.textContent = BRL(qty*unit);
+  });
+}
+
+document.querySelectorAll('input[name="servico"]').forEach(radio=>{
+  radio.addEventListener('change',()=>{
+    refreshSelectedPackage();
+    updatePackageTotals();
+    buildSummary();
+  });
+});
+
+document.querySelectorAll('.stepper').forEach(stepper=>{
+  const input = stepper.querySelector('.qtyInput');
+  const minus = stepper.querySelector('.qtyMinus');
+  const plus = stepper.querySelector('.qtyPlus');
+  const radio = findServiceRadio(stepper.dataset.service);
+
+  function activate(){
+    if(radio && !radio.checked){
+      radio.checked = true;
+      radio.dispatchEvent(new Event('change',{bubbles:true}));
+    }
+  }
+  function setQty(next){
+    activate();
+    const min = Number(input.min||1);
+    input.value = Math.max(min, Math.floor(Number(next)||min));
+    if(radio && radio.dataset.kind === 'perperson'){
+      document.getElementById('pessoas').value = input.value;
+    }
+    updatePackageTotals();
+    buildSummary();
+  }
+
+  minus.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();setQty(Number(input.value)-1)});
+  plus.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();setQty(Number(input.value)+1)});
+  input.addEventListener('click',e=>{e.stopPropagation();activate()});
+  input.addEventListener('change',()=>setQty(input.value));
+  input.addEventListener('input',()=>{
+    activate();
+    if(radio && radio.dataset.kind === 'perperson'){
+      const min = Number(input.min||1);
+      document.getElementById('pessoas').value = Math.max(min,Number(input.value||min));
+    }
+    updatePackageTotals();
+    buildSummary();
+  });
+});
+
+// Pescados especiais pertencem ao Serviço de Rodízio INKASA.
+function selectRodizioForFish(){
+  const radio = findServiceRadio('Serviço de Rodízio INKASA');
+  if(radio && !radio.checked){
+    radio.checked = true;
+    radio.dispatchEvent(new Event('change',{bubbles:true}));
+  }
+}
+document.querySelectorAll('.specialFish').forEach(el=>{
+  el.addEventListener('change',()=>{ selectRodizioForFish(); buildSummary(); });
+});
+const outroPescadoInput = document.getElementById('outroPescado');
+if(outroPescadoInput){
+  outroPescadoInput.addEventListener('focus',selectRodizioForFish);
+  outroPescadoInput.addEventListener('input',()=>{ selectRodizioForFish(); buildSummary(); });
+}
+
+const pessoasInput = document.getElementById('pessoas');
+if(pessoasInput){
+  pessoasInput.addEventListener('input',()=>{
+    const s = selectedService();
+    if(s && s.dataset.kind === 'perperson'){
+      const q = document.getElementById(s.dataset.qtyId);
+      const min = Number(s.dataset.min||1);
+      if(q){
+        q.value = Math.max(min,Number(pessoasInput.value||min));
+        updatePackageTotals();
+      }
+    }
+    buildSummary();
+  });
+}
+
+document.querySelectorAll('input:not([name="servico"]):not(.qtyInput),select,textarea').forEach(el=>{
+  if(el.id === 'pessoas') return;
   el.addEventListener('input',buildSummary);
   el.addEventListener('change',buildSummary);
 });
+
+updatePackageTotals();
+refreshSelectedPackage();
 
 function openRodizio(){
   const m = document.getElementById('rodModal');
