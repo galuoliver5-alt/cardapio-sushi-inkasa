@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#070707">
+<title>Sushi INKASA — Eventos</title>
+<style>
+:root{
+  --bg:#070707;--card:#111;--soft:#171717;--line:#292929;--text:#f7f7f7;
+  --muted:#a6a6a6;--red:#e31922;--gold:#caa96b;--max:780px
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--bg);color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  -webkit-font-smoothing:antialiased
+}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+.wrap{max-width:var(--max);margin:auto;padding:0 18px 118px}
+header{padding:38px 0 20px;text-align:center}
+.logo{
+  width:68px;height:68px;border-radius:50%;background:var(--red);
+  display:grid;place-items:center;margin:0 auto 12px;font-size:26px;font-weight:950;letter-spacing:-2px
+}
+.brand{font-weight:950;font-size:25px;letter-spacing:.1em}
+.brand span{font-weight:500}
+.kicker{margin-top:8px;color:#888;font-size:11px;text-transform:uppercase;letter-spacing:.2em}
+.hero{
+  border:1px solid var(--line);border-radius:22px;padding:22px 18px;
+  background:linear-gradient(180deg,#151515,#0c0c0c);margin:8px 0 18px
+}
+.hero h1{margin:0 0 10px;font-size:28px;line-height:1.05}
+.hero p{margin:0;color:#c7c7c7;font-size:14px;line-height:1.55}
+.heroQuote{margin-top:15px;padding-top:14px;border-top:1px solid #282828;font-size:13px;font-weight:800}
+.sticky{
+  position:sticky;top:0;z-index:15;padding:8px 0 12px;
+  background:linear-gradient(var(--bg) 78%,rgba(7,7,7,.86))
+}
+.nav{display:flex;gap:8px;overflow:auto;scrollbar-width:none}
+.nav::-webkit-scrollbar{display:none}
+.nav a{
+  text-decoration:none;color:#fff;white-space:nowrap;background:#0d0d0d;
+  border:1px solid #2d2d2d;border-radius:999px;padding:9px 13px;font-size:12px;font-weight:800
+}
+section{padding-top:18px;scroll-margin-top:78px}
+.title{display:flex;align-items:center;gap:10px;margin:6px 0 12px}
+.title h2{margin:0;font-size:15px;text-transform:uppercase;letter-spacing:.15em}
+.title:after{content:"";height:1px;background:#2a2a2a;flex:1}
+.packages{display:grid;gap:13px}
+.package{
+  position:relative;border:1px solid var(--line);border-radius:20px;background:var(--card);
+  padding:17px;transition:.18s ease
+}
+.package:has(input:checked){border-color:#6f6f6f;box-shadow:0 0 0 1px #6f6f6f inset}
+.packageTop{display:flex;align-items:flex-start;justify-content:space-between;gap:14px}
+.package h3{font-size:19px;margin:0 0 5px}
+.price{font-size:23px;font-weight:950;white-space:nowrap}
+.sub{font-size:12px;color:var(--muted);line-height:1.5;margin-top:3px}
+.tag{
+  display:inline-block;padding:5px 8px;border:1px solid #3a3a3a;border-radius:999px;
+  color:#ddd;font-size:9px;font-weight:850;text-transform:uppercase;letter-spacing:.08em;margin-bottom:9px
+}
+.features{
+  display:grid;grid-template-columns:1fr 1fr;gap:7px 12px;margin:14px 0 12px;padding:0;list-style:none
+}
+.features li{font-size:12px;color:#ddd;line-height:1.35}
+.features li:before{content:"• ";color:var(--red);font-weight:950}
+.selectLine{
+  display:flex;align-items:center;gap:9px;border-top:1px solid #282828;padding-top:13px;
+  font-size:13px;font-weight:850
+}
+.selectLine input{accent-color:var(--red);width:18px;height:18px}
+.menuBtn{
+  width:100%;margin-top:11px;border:1px solid #444;border-radius:13px;padding:11px 12px;
+  background:#080808;color:#fff;font-weight:850;font-size:12px;display:block;text-align:center;text-decoration:none
+}
+.menuBtn:hover{border-color:#777}
+.formCard{background:#101010;border:1px solid var(--line);border-radius:18px;padding:16px}
+.formGrid{display:grid;gap:12px}
+.field span{display:block;margin-bottom:7px;color:#ddd;font-size:12px;font-weight:800}
+input,select,textarea{
+  width:100%;background:#0c0c0c;border:1px solid #303030;color:#fff;
+  border-radius:13px;padding:13px 12px;outline:none
+}
+input:focus,select:focus,textarea:focus{border-color:#686868}
+textarea{min-height:95px;resize:vertical}
+
+.optionalBox{
+  margin-top:14px;padding:15px;border:1px solid #343434;border-radius:16px;background:#0c0c0c
+}
+.optionalBox h3{margin:0 0 6px;font-size:15px}
+.optionalBox p{margin:0 0 12px;color:#9e9e9e;font-size:11px;line-height:1.5}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{position:relative}
+.chip input{position:absolute;opacity:0;pointer-events:none}
+.chip span{
+  display:block;padding:10px 12px;border:1px solid #3a3a3a;border-radius:999px;
+  background:#111;color:#eee;font-size:12px;font-weight:800;cursor:pointer
+}
+.chip input:checked + span{
+  border-color:var(--red);background:#1b0b0c;box-shadow:0 0 0 1px var(--red) inset
+}
+.otherWrap{margin-top:10px}
+.note{
+  margin-top:12px;padding:12px;border:1px solid #292929;background:#0c0c0c;
+  border-radius:13px;color:#929292;font-size:11px;line-height:1.5
+}
+.summary{
+  white-space:pre-wrap;background:#101010;border:1px solid #303030;border-radius:18px;
+  padding:16px;font-size:13px;line-height:1.6
+}
+.total{
+  display:flex;justify-content:space-between;gap:12px;margin-top:12px;
+  border-top:1px solid #292929;padding-top:12px;font-size:16px;font-weight:950
+}
+.cta{
+  position:fixed;left:0;right:0;bottom:0;z-index:25;
+  padding:12px 16px calc(12px + env(safe-area-inset-bottom));
+  background:linear-gradient(rgba(7,7,7,.1),#070707 28%)
+}
+.ctaIn{max-width:var(--max);margin:auto}
+.whats{
+  width:100%;border:0;border-radius:16px;padding:15px;background:var(--red);
+  color:#fff;font-weight:950;font-size:15px
+}
+.footer{text-align:center;color:#666;font-size:11px;padding:36px 0 0}
+
+/* modal do rodízio */
+.modal{
+  display:none;position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.94);
+  padding:16px;overflow:auto
+}
+.modal.open{display:block}
+.modalCard{
+  width:min(740px,100%);margin:8px auto 40px;background:#020202;border:1px solid #4a4030;
+  border-radius:20px;padding:20px 16px 24px;box-shadow:0 30px 90px #000
+}
+.closeRow{display:flex;justify-content:flex-end}
+.close{
+  width:40px;height:40px;border-radius:50%;border:1px solid #3a3a3a;background:#0a0a0a;
+  color:#fff;font-size:22px;line-height:1
+}
+.rodHead{text-align:center;border-bottom:1px solid #5b4b32;padding:2px 0 18px;margin-bottom:18px}
+.rodSmall{color:var(--gold);font-size:10px;letter-spacing:.28em;text-transform:uppercase}
+.rodTitle{font-family:Georgia,serif;font-size:34px;letter-spacing:.14em;margin:7px 0 4px}
+.rodPrice{font-size:15px;color:#ddd}
+.rodPrice strong{font-size:22px;color:#fff}
+.rodGrid{display:grid;gap:18px}
+.rodBlock{border-top:1px solid #3b3328;padding-top:13px}
+.rodBlock h4{
+  margin:0 0 10px;color:#e7dfd0;font-family:Georgia,serif;
+  font-size:16px;letter-spacing:.13em;text-transform:uppercase
+}
+.rodBlock ul{list-style:none;margin:0;padding:0}
+.rodBlock li{
+  padding:7px 0;border-bottom:1px solid #181818;color:#ddd;font-size:12px;line-height:1.4
+}
+.rodLabel{
+  display:inline-block;color:var(--gold);font-size:9px;font-weight:900;letter-spacing:.08em;
+  text-transform:uppercase;margin:4px 0 7px
+}
+.rodFoot{
+  margin-top:18px;border-top:1px solid #5b4b32;padding-top:15px;text-align:center;
+  color:#aaa;font-size:10px;line-height:1.55;letter-spacing:.03em
+}
+@media(min-width:650px){
+  .packages{grid-template-columns:1fr 1fr}
+  .package.rodizio{grid-column:1/-1}
+  .formGrid.two{grid-template-columns:1fr 1fr}
+  .rodGrid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:420px){
+  .packageTop{display:block}
+  .price{margin-top:8px}
+  .features{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="logo">IK</div>
+  <div class="brand">SUSHI <span>INKASA</span></div>
+  <div class="kicker">Eventos & experiências</div>
+</header>
+
+<div class="hero">
+  <h1>Seu evento com a experiência INKASA.</h1>
+  <p>Escolha o formato que combina com o seu evento, preencha os dados e envie a solicitação diretamente para nossa equipe pelo WhatsApp.</p>
+  <div class="heroQuote">Nossa ilha é muito mais que um buffet de sushi. É a escolha de proporcionar o melhor para os melhores momentos.</div>
+</div>
+
+<div class="sticky">
+  <div class="nav">
+    <a href="#servicos">Serviços</a>
+    <a href="#dados">Seu evento</a>
+    <a href="#resumo">Resumo</a>
+  </div>
+</div>
+
+<section id="servicos">
+  <div class="title"><h2>Escolha a experiência</h2></div>
+  <div class="packages">
+
+    <label class="package">
+      <span class="tag">Ilha de Sushi</span>
+      <div class="packageTop">
+        <div>
+          <h3>Ilha de Sushi INKASA 01</h3>
+          <div class="sub">Serve até 12 pessoas</div>
+        </div>
+        <div class="price">R$ 3.000</div>
+      </div>
+      <ul class="features">
+        <li>300 peças de sushi</li>
+        <li>60 peças de carpaccio</li>
+        <li>4 tipos de uramakis</li>
+        <li>2 tipos de joes</li>
+        <li>1 tipo de niguiri</li>
+        <li>1 tipo de carpaccio</li>
+        <li>Estrutura de buffet oriental completa</li>
+      </ul>
+      <div class="selectLine">
+        <input type="radio" name="servico" value="Ilha de Sushi INKASA 01" data-kind="fixed" data-price="3000">
+        Selecionar esta ilha
+      </div>
+    </label>
+
+    <label class="package">
+      <span class="tag">Ilha Premium</span>
+      <div class="packageTop">
+        <div>
+          <h3>Ilha de Sushi INKASA 02</h3>
+          <div class="sub">Serve bem 20 pessoas</div>
+        </div>
+        <div class="price">R$ 5.400</div>
+      </div>
+      <ul class="features">
+        <li>380 peças de sushi</li>
+        <li>20 ceviches</li>
+        <li>60 peças de carpaccio</li>
+        <li>60 peças de sashimi</li>
+        <li>4 tipos de uramakis</li>
+        <li>2 tipos de joes</li>
+        <li>1 tipo de niguiri</li>
+        <li>1 tipo de carpaccio</li>
+        <li>1 tipo de ceviche</li>
+        <li>1 tipo de sashimi</li>
+        <li>Estrutura de buffet oriental completa</li>
+      </ul>
+      <div class="selectLine">
+        <input type="radio" name="servico" value="Ilha de Sushi INKASA 02" data-kind="fixed" data-price="5400">
+        Selecionar esta ilha
+      </div>
+    </label>
+
+    <label class="package">
+      <span class="tag">Grandes eventos</span>
+      <div class="packageTop">
+        <div>
+          <h3>Ilha de Sushi INKASA 03</h3>
+          <div class="sub">Para eventos acima de 50 pessoas • serviço servido como entrada</div>
+        </div>
+        <div class="price">R$ 80 <span style="font-size:11px;color:#999;font-weight:700">/ pessoa</span></div>
+      </div>
+      <ul class="features">
+        <li>2 horas de duração</li>
+        <li>Acompanhamento e reposição contínua da ilha durante a festa</li>
+        <li>4 tipos de uramakis</li>
+        <li>2 tipos de joes</li>
+        <li>1 tipo de niguiri</li>
+        <li>1 tipo de carpaccio</li>
+        <li>Estrutura de buffet oriental completa</li>
+      </ul>
+      <div class="selectLine">
+        <input type="radio" name="servico" value="Ilha de Sushi INKASA 03" data-kind="perperson" data-price="80" data-min="51">
+        Selecionar Ilha 03
+      </div>
+    </label>
+
+    <label class="package">
+      <span class="tag">Grandes eventos premium</span>
+      <div class="packageTop">
+        <div>
+          <h3>Ilha de Sushi INKASA 04</h3>
+          <div class="sub">Para eventos acima de 50 pessoas • serviço servido como entrada</div>
+        </div>
+        <div class="price">R$ 140 <span style="font-size:11px;color:#999;font-weight:700">/ pessoa</span></div>
+      </div>
+      <ul class="features">
+        <li>2 horas de duração</li>
+        <li>Acompanhamento e reposição contínua da ilha durante a festa</li>
+        <li>4 tipos de uramakis</li>
+        <li>2 tipos de joes</li>
+        <li>1 tipo de niguiri</li>
+        <li>1 tipo de carpaccio</li>
+        <li>2 tipos de sashimis</li>
+        <li>1 tipo de ceviche</li>
+        <li>1 entrada quente — shimeji ou guioza</li>
+        <li>Estrutura de buffet oriental completa</li>
+      </ul>
+      <div class="selectLine">
+        <input type="radio" name="servico" value="Ilha de Sushi INKASA 04" data-kind="perperson" data-price="140" data-min="51">
+        Selecionar Ilha 04
+      </div>
+    </label>
+
+    <div class="package rodizio">
+      <span class="tag">Chef + Rodízio</span>
+      <div class="packageTop">
+        <div>
+          <h3>Serviço de Rodízio INKASA</h3>
+          <div class="sub">R$ 380 por pessoa • mínimo de 12 pessoas</div>
+        </div>
+        <div class="price">R$ 380 <span style="font-size:11px;color:#999;font-weight:700">/ pessoa</span></div>
+      </div>
+      <div class="sub" style="margin-top:10px">
+        Experiência de rodízio para eventos com seleção baseada no cardápio do Rodízio INKASA.
+        O valor é calculado pela quantidade de convidados, respeitando o mínimo de 12 pessoas.
+      </div>
+      <a class="menuBtn" href="cardapio-rodizio-eventos-inkasa.pdf" target="_blank" rel="noopener">Ver cardápio do Rodízio INKASA</a>
+      <label class="selectLine" style="margin-top:12px">
+        <input type="radio" name="servico" value="Serviço de Rodízio INKASA" data-kind="perperson" data-price="380" data-min="12">
+        Selecionar serviço de rodízio
+      </label>
+    </div>
+
+  </div>
+</section>
+
+<section id="dados">
+  <div class="title"><h2>Dados do evento</h2></div>
+  <div class="formCard">
+    <div class="formGrid">
+      <div class="formGrid two">
+        <label class="field">
+          <span>Nome</span>
+          <input id="nome" placeholder="Seu nome">
+        </label>
+        <label class="field">
+          <span>WhatsApp</span>
+          <input id="contato" inputmode="tel" placeholder="(67) 99999-9999">
+        </label>
+      </div>
+
+      <div class="formGrid two">
+        <label class="field">
+          <span>Tipo de evento</span>
+          <select id="tipo">
+            <option>Aniversário</option>
+            <option>Casamento</option>
+            <option>Confraternização</option>
+            <option>Evento corporativo</option>
+            <option>Jantar particular</option>
+            <option>Outro</option>
+          </select>
+        </label>
+        <label class="field">
+          <span>Número de pessoas</span>
+          <input id="pessoas" type="number" min="1" inputmode="numeric" placeholder="Ex.: 20">
+        </label>
+      </div>
+
+      <div class="formGrid two">
+        <label class="field">
+          <span>Data</span>
+          <input id="data" type="date">
+        </label>
+        <label class="field">
+          <span>Horário</span>
+          <input id="hora" type="time">
+        </label>
+      </div>
+
+      <label class="field">
+        <span>Local / espaço do evento</span>
+        <input id="local" placeholder="Nome do espaço, residência ou endereço">
+      </label>
+
+      <label class="field">
+        <span>Cidade</span>
+        <input id="cidade" placeholder="Ex.: Campo Grande/MS">
+      </label>
+
+      <label class="field">
+        <span>Observações</span>
+        <textarea id="obs" placeholder="Conte aqui qualquer detalhe importante sobre o evento ou preferências."></textarea>
+      </label>
+    </div>
+
+    <div class="optionalBox">
+      <h3>Pescados especiais — opcional</h3>
+      <p>
+        Atum, polvo, prego e peixes brancos da estação precisam ser solicitados com
+        no mínimo 7 dias de antecedência. Os produtos vêm da costa catarinense e
+        dependem de disponibilidade.
+      </p>
+      <div class="chips">
+        <label class="chip"><input class="specialFish" type="checkbox" value="Atum"><span>Atum</span></label>
+        <label class="chip"><input class="specialFish" type="checkbox" value="Polvo"><span>Polvo</span></label>
+        <label class="chip"><input class="specialFish" type="checkbox" value="Prego"><span>Prego</span></label>
+        <label class="chip"><input class="specialFish" type="checkbox" value="Peixe branco da estação"><span>Peixe branco da estação</span></label>
+      </div>
+      <div class="otherWrap">
+        <label class="field">
+          <span>Outro pescado que gostaria de consultar</span>
+          <input id="outroPescado" placeholder="Ex.: vieira, lula, outro peixe...">
+        </label>
+      </div>
+    </div>
+
+    <div class="note">
+      O envio da solicitação não confirma a reserva. Data, disponibilidade, deslocamento, estrutura e detalhes finais do serviço são confirmados diretamente com o Sushi INKASA.
+    </div>
+  </div>
+</section>
+
+<section id="resumo">
+  <div class="title"><h2>Resumo da solicitação</h2></div>
+  <div id="summary" class="summary">Escolha um serviço e informe os dados do evento.</div>
+  <div class="total">
+    <span>Valor base</span>
+    <span id="total">—</span>
+  </div>
+</section>
+
+<div class="footer">Sushi INKASA • Eventos • Chef Gabriel Lucas</div>
+</div>
+
+<div class="cta">
+  <div class="ctaIn">
+    <button class="whats" type="button" id="send">Solicitar disponibilidade no WhatsApp</button>
+  </div>
+</div>
+
+<!-- CARDÁPIO RODÍZIO -->
+<div class="modal" id="rodModal" aria-hidden="true">
+  <div class="modalCard">
+    <div class="closeRow"><button class="close" type="button" onclick="closeRodizio()">×</button></div>
+    <div class="rodHead">
+      <div class="rodSmall">Sushi INKASA • Eventos</div>
+      <div class="rodTitle">RODÍZIO</div>
+      <div class="rodPrice"><strong>R$ 380</strong> por pessoa • mínimo 12 pessoas</div>
+    </div>
+
+    <div class="rodGrid">
+      <div>
+        <div class="rodLabel">Entradas & quentes</div>
+
+        <div class="rodBlock">
+          <h4>Entradas</h4>
+          <ul>
+            <li>Sunomono</li>
+            <li>Tilápia frita</li>
+            <li>Harumaki de mignon com cheddar</li>
+            <li>Sobá</li>
+            <li>Batata frita</li>
+            <li>Ceviche de tilápia</li>
+            <li>Shimeji</li>
+            <li>Carpaccio de tilápia — molho de limão com pimenta</li>
+            <li>Carpaccio de salmão — molho ponzo</li>
+          </ul>
+        </div>
+
+        <div class="rodBlock">
+          <h4>Quentes & especiais</h4>
+          <ul>
+            <li>Teppan de salmão</li>
+            <li>Teppan de tilápia</li>
+            <li>Yakisoba</li>
+            <li>Guioza suíno</li>
+            <li>Tempurá de sorvete</li>
+          </ul>
+        </div>
+      </div>
+
+      <div>
+        <div class="rodLabel">Sushis</div>
+
+        <div class="rodBlock">
+          <h4>Uramakis & Hots</h4>
+          <ul>
+            <li>Uramaki Philadelphia</li>
+            <li>Uramaki grelhado</li>
+            <li>Uramaki especial de salmão batido</li>
+            <li>Uramaki Nikkei</li>
+            <li>Uramaki Philadelphia especial</li>
+            <li>Uramaki Romeu e Julieta</li>
+            <li>Uramaki rúcula com tomate seco</li>
+            <li>Uramaki de camarão empanado</li>
+            <li>Hot Philadelphia</li>
+            <li>Hot couve</li>
+            <li>Hot sensação</li>
+          </ul>
+        </div>
+
+        <div class="rodBlock">
+          <h4>Joes, Niguiris & Sashimis</h4>
+          <ul>
+            <li>Joe salmão</li>
+            <li>Joe camarão na manteiga</li>
+            <li>Joe camarão empanado</li>
+            <li>Joe shimeji</li>
+            <li>Sophia</li>
+            <li>Niguiri salmão</li>
+            <li>Niguiri skin</li>
+            <li>Niguiri tilápia no limão</li>
+            <li>Sashimi salmão</li>
+            <li>Sashimi tilápia ou peixe branco do dia</li>
+            <li>Sashimi salmão gomaiaki</li>
+          </ul>
+        </div>
+
+        <div class="rodBlock">
+          <h4>Temakis</h4>
+          <ul>
+            <li>Salmão</li>
+            <li>Philadelphia</li>
+            <li>Skin</li>
+            <li>Joe</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="rodFoot">
+      Cardápio sujeito à disponibilidade dos insumos e ajustes operacionais do evento.<br>
+      Informe previamente alergias ou restrições alimentares.
+    </div>
+  </div>
+</div>
+
+<script>
+const BRL = n => new Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL'}).format(n);
+
+function selectedService(){
+  return document.querySelector('input[name="servico"]:checked');
+}
+function valueInfo(){
+  const s = selectedService();
+  if(!s) return {value:null,label:'—'};
+  const kind = s.dataset.kind;
+  const base = Number(s.dataset.price||0);
+  if(kind === 'fixed') return {value:base,label:BRL(base)};
+  const pessoas = Number(document.getElementById('pessoas').value||0);
+  const minimo = Number(s.dataset.min||1);
+  const cobradas = Math.max(minimo,pessoas||minimo);
+  const total = cobradas * base;
+  return {value:total,label:BRL(total),count:cobradas,minimo:minimo,unit:base};
+}
+function buildSummary(){
+  const s = selectedService();
+  const vi = valueInfo();
+  const pessoas = document.getElementById('pessoas').value || '—';
+  let lines = [
+    'SOLICITAÇÃO DE EVENTO — SUSHI INKASA',
+    '',
+    'Serviço: ' + (s ? s.value : '—'),
+    'Tipo de evento: ' + document.getElementById('tipo').value,
+    'Pessoas: ' + pessoas,
+    'Data: ' + (document.getElementById('data').value || '—'),
+    'Horário: ' + (document.getElementById('hora').value || '—'),
+    '',
+    'Nome: ' + (document.getElementById('nome').value || '—'),
+    'WhatsApp: ' + (document.getElementById('contato').value || '—'),
+    'Local: ' + (document.getElementById('local').value || '—'),
+    'Cidade: ' + (document.getElementById('cidade').value || '—')
+  ];
+  const obs = document.getElementById('obs').value.trim();
+  if(obs) lines.push('Observações: ' + obs);
+
+  const especiais = [...document.querySelectorAll('.specialFish:checked')].map(el=>el.value);
+  const outroPescado = document.getElementById('outroPescado').value.trim();
+  if(especiais.length || outroPescado){
+    lines.push('');
+    lines.push('Pescados especiais solicitados:');
+    if(especiais.length) lines.push(especiais.join(', '));
+    if(outroPescado) lines.push('Outro para verificar: ' + outroPescado);
+    lines.push('Observação: pescados especiais exigem mínimo de 7 dias de antecedência e dependem de disponibilidade da costa catarinense.');
+  }
+
+  if(s && s.dataset.kind === 'perperson'){
+    const minimo = Number(s.dataset.min||1);
+    const unit = Number(s.dataset.price||0);
+    lines.push('', s.value + ': ' + BRL(unit) + ' por pessoa • mínimo ' + minimo + ' pessoas');
+    lines.push('Valor base estimado: ' + vi.label);
+  } else if(s) {
+    lines.push('', 'Valor do pacote: ' + vi.label);
+  }
+
+  lines.push('', 'Gostaria de confirmar disponibilidade e os detalhes finais do serviço.');
+
+  document.getElementById('summary').textContent = lines.join('\n');
+  document.getElementById('total').textContent = vi.label;
+  return lines.join('\n');
+}
+
+document.querySelectorAll('input,select,textarea').forEach(el=>{
+  el.addEventListener('input',buildSummary);
+  el.addEventListener('change',buildSummary);
+});
+
+function openRodizio(){
+  const m = document.getElementById('rodModal');
+  m.classList.add('open');
+  m.setAttribute('aria-hidden','false');
+  document.body.style.overflow='hidden';
+}
+function closeRodizio(){
+  const m = document.getElementById('rodModal');
+  m.classList.remove('open');
+  m.setAttribute('aria-hidden','true');
+  document.body.style.overflow='';
+}
+document.getElementById('rodModal').addEventListener('click', e=>{
+  if(e.target.id==='rodModal') closeRodizio();
+});
+
+document.getElementById('send').addEventListener('click',()=>{
+  const text = buildSummary();
+  window.open('https://wa.me/5567998372616?text='+encodeURIComponent(text),'_blank');
+});
+buildSummary();
+</script>
+</body>
+</html>
