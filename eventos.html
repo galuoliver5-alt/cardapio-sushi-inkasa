@@ -213,9 +213,81 @@ textarea{min-height:95px;resize:vertical}
   .price{margin-top:8px}
   .features{grid-template-columns:1fr}
 }
-</style>
+
+    /* ABERTURA EM VÍDEO */
+    .videoIntro{
+      position:fixed;inset:0;z-index:99999;background:#000;
+      display:flex;align-items:center;justify-content:center;
+      opacity:1;visibility:visible;
+      transition:opacity .45s ease,visibility .45s ease;
+      animation:introFallback .45s 17s forwards;
+    }
+    .videoIntro.manualPlayback{animation:none}
+    .videoIntro.hide,
+    #conteudo:target + .videoIntro{
+      opacity:0;visibility:hidden;pointer-events:none;
+    }
+    @keyframes introFallback{
+      to{opacity:0;visibility:hidden;pointer-events:none}
+    }
+    .videoIntro video{
+      position:absolute;inset:0;width:100%;height:100%;
+      object-fit:cover;background:#000
+    }
+    .videoShade{
+      position:absolute;inset:0;pointer-events:none;
+      background:linear-gradient(to bottom,rgba(0,0,0,.16),rgba(0,0,0,.02) 58%,rgba(0,0,0,.78))
+    }
+    .introBrand{
+      position:absolute;top:max(26px,env(safe-area-inset-top));left:20px;right:20px;
+      color:#fff;text-align:center;text-shadow:0 2px 16px rgba(0,0,0,.55);
+      pointer-events:none
+    }
+    .introBrand strong{display:block;font-size:18px;letter-spacing:.13em}
+    .introBrand span{display:block;margin-top:5px;font-size:11px;letter-spacing:.15em;text-transform:uppercase;opacity:.9}
+    .introActions{
+      position:absolute;left:18px;right:18px;
+      bottom:calc(24px + env(safe-area-inset-bottom));
+      display:flex;flex-direction:column;align-items:center;gap:9px
+    }
+    .listenBtn{
+      width:min(100%,430px);padding:14px 18px;border-radius:999px;
+      border:1px solid rgba(255,255,255,.55);background:rgba(0,0,0,.58);
+      color:#fff;font-size:14px;font-weight:900;backdrop-filter:blur(10px)
+    }
+    .introInfo{
+      color:#fff;font-size:11px;text-align:center;opacity:.88;
+      text-shadow:0 2px 12px rgba(0,0,0,.75)
+    }
+    .skipIntro{
+      color:#fff;text-decoration:none;font-size:12px;font-weight:800;
+      padding:9px 15px;border-radius:999px;background:rgba(0,0,0,.28)
+    }
+
+  </style>
 </head>
 <body>
+
+  <div id="conteudo"></div>
+  <section class="videoIntro" id="videoIntro">
+    <video id="introVideo" autoplay muted playsinline webkit-playsinline controls preload="auto">
+      <source src="apresentacao-eventos.mp4" type="video/mp4">
+      Seu navegador não conseguiu reproduzir o vídeo.
+    </video>
+    <div class="videoShade"></div>
+
+    <div class="introBrand">
+      <strong>SUSHI INKASA</strong>
+      <span>Festas & Eventos</span>
+    </div>
+
+    <div class="introActions">
+      <button class="listenBtn" id="listenBtn" type="button">🔊 Ativar som e assistir do início</button>
+      <div class="introInfo">Se o vídeo não iniciar sozinho, toque no ▶ do próprio vídeo.</div>
+      <a class="skipIntro" id="skipIntro" href="#conteudo">Pular apresentação</a>
+    </div>
+  </section>
+
 <div class="wrap">
 <header>
   <div class="logo">IK</div>
@@ -867,6 +939,63 @@ document.getElementById('send').addEventListener('click',()=>{
   window.open('https://wa.me/5567998372616?text='+encodeURIComponent(text),'_blank');
 });
 buildSummary();
-</script>
+
+    // Abertura em vídeo: o site continua acessível mesmo se JavaScript for bloqueado,
+    // graças ao link "Pular apresentação" e ao fallback em CSS.
+    (function(){
+      const overlay = document.getElementById('videoIntro');
+      const video = document.getElementById('introVideo');
+      const listen = document.getElementById('listenBtn');
+      const skip = document.getElementById('skipIntro');
+
+      if(!overlay || !video) return;
+
+      function closeVideo(){
+        overlay.classList.add('hide');
+        try{ video.pause(); }catch(e){}
+      }
+
+      video.addEventListener('ended', closeVideo);
+
+      if(listen){
+        listen.addEventListener('click', async function(){
+          overlay.classList.add('manualPlayback');
+          try{
+            video.pause();
+            video.currentTime = 0;
+            video.muted = false;
+            video.volume = 1;
+            await video.play();
+            listen.textContent = '🔊 Apresentação com som';
+          }catch(e){
+            // Se o navegador ainda bloquear áudio, mantém controles nativos visíveis.
+            listen.textContent = '▶ Toque no play do vídeo';
+          }
+        });
+      }
+
+      if(skip){
+        skip.addEventListener('click', function(){
+          closeVideo();
+        });
+      }
+
+      // Tenta iniciar o autoplay mudo quando a página carregar.
+      const tryPlay = function(){
+        video.muted = true;
+        const p = video.play();
+        if(p && typeof p.catch === 'function'){
+          p.catch(function(){ /* controles nativos ficam disponíveis */ });
+        }
+      };
+
+      if(document.readyState === 'loading'){
+        document.addEventListener('DOMContentLoaded', tryPlay, {once:true});
+      }else{
+        tryPlay();
+      }
+    })();
+
+  </script>
 </body>
 </html>
